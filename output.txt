@@ -1,0 +1,60 @@
+Microsoft Windows [Version 10.0.19041.1288]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\K_S_M>
+C:\Users\K_S_M>curl -X GET http://localhost:8080/users/everyone -H "Content-Type:application/json"
+[{"id":1,"name":"Kane","type":"admin"},{"id":2,"name":"John","type":"reader"},{"id":3,"name":"Jim","type":"author"}]
+
+C:\Users\K_S_M>
+C:\Users\K_S_M>curl -X GET http://localhost:8080/users/1 -H "Content-Type:application/json"
+{"id":1,"name":"Kane","type":"admin"}
+
+C:\Users\K_S_M>
+C:\Users\K_S_M>curl -X GET http://localhost:8080/users/0 -H "Content-Type:application/json"
+{"error":"No user found."}
+
+C:\Users\K_S_M>
+C:\Users\K_S_M>curl -X POST http://localhost:8080/users -d "{\"name\": \"Jordan Peterson\", \"type\": \"author\"}" -H "Content-Type:application/json"
+{"id":4,"name":"Jordan Peterson","type":"author"}
+
+C:\Users\K_S_M>
+C:\Users\K_S_M>curl -X PUT http://localhost:8080/users/2 -d "{\"name\": \"John Sullivan\", \"type\": \"reader\"}" -H "Content-Type:application/json"
+{"id":2,"name":"John Sullivan","type":"reader"}
+
+C:\Users\K_S_M>
+C:\Users\K_S_M>curl -X PUT http://localhost:8080/users/2 -d "{\"name\": \"Johnathen Sullivan\"}" -H "Content-Type:application/json"
+{"id":2,"name":"Johnathen Sullivan","type":"reader"}
+
+C:\Users\K_S_M>
+C:\Users\K_S_M>curl -X PUT http://localhost:8080/users/2 -d "{\"type\": \"pro_reader\"}" -H "Content-Type:application/json"
+{"id":2,"name":"Johnathen Sullivan","type":"pro_reader"}
+
+C:\Users\K_S_M>
+C:\Users\K_S_M>curl -X POST http://localhost:8080/users/reset -H "Content-Type:application/json"
+[{"id":1,"name":"Kane","type":"admin"},{"id":2,"name":"John","type":"reader"},{"id":3,"name":"Jim","type":"author"}]
+
+C:\Users\K_S_M>
+C:\Users\K_S_M>curl -X DELETE http://localhost:8080/users/2 -H "Content-Type:application/json"
+{"operation complete":"user id 2 deleted"}
+
+C:\Users\K_S_M>
+C:\Users\K_S_M>curl -X GET http://localhost:8080/users/all/recipies -H "Content-Type:application/json"
+[{"id":1,"steps":"bake cookies","user_id":1},{"id":2,"steps":"(1) clean rice (2) cook rice (3) eat rice","user_id":1}]
+
+C:\Users\K_S_M>
+C:\Users\K_S_M>curl -X GET http://localhost:8080/users/1/recipies -H "Content-Type:application/json"
+[{"id":1,"steps":"bake cookies","user_id":1},{"id":2,"steps":"(1) clean rice (2) cook rice (3) eat rice","user_id":1}]
+
+C:\Users\K_S_M>
+C:\Users\K_S_M>curl -X POST http://localhost:8080/users/3/recipies -d "{\"steps\": \"chop steak, season steak, grill steak till medium rare, enjoy steak\" }" -H "Content-Type:application/json"
+{"id":3,"steps":"chop steak, season steak, grill steak till medium rare, enjoy steak","user_id":3}
+
+C:\Users\K_S_M>
+C:\Users\K_S_M>curl -X PUT http://localhost:8080/users/3/recipies/3 -d "{\"steps\": \"chop steak, season steak, grill steak till medium rare, enjoy steak\" }" -H "Content-Type:application/json"
+{"id":3,"steps":"chop steak, season steak, grill steak till medium rare, enjoy steak","user_id":3}
+
+C:\Users\K_S_M>
+C:\Users\K_S_M>curl -X DELETE http://localhost:8080/users/1/recipies/1 -H "Content-Type:application/json"
+{"operation successful":"recipe 1 from user 1 has been deleted"}
+
+C:\Users\K_S_M>
